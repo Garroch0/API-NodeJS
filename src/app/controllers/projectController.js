@@ -38,8 +38,7 @@ router.post('/', async (req, res)=> {
       const projectTask = new Task({...task, project: project._id });
 
       await projectTask.save();
-      
-      project.tasks.push(projectTask);
+        project.tasks.push(projectTask);
     }));
 
     await project.save();
@@ -61,9 +60,9 @@ router.put('/:projectId', async (req, res)=> {
     }, { new: true });
 
     project.tasks = [];
-    await Task.remoke({ project: project._id});
+    await Task.remove({ project: project._id });
 
-    await Promise.all(tasks.map(async task =>{
+    await Promise.all(tasks.map(async task => {
       const projectTask = new Task({ ...task, project: project._id });
 
       await projectTask.save();
